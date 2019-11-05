@@ -1,0 +1,28 @@
+{
+  "name": "budge",
+  "version": "1.0.0",
+  "description": "A budgeting app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuakiley/budge.git"
+  },
+  "author": "Joshua Kiley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshuakiley/budge/issues"
+  },
+  "homepage": "https://github.com/joshuakiley/budge#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.7.7"
+  }
+}
