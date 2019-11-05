@@ -31,6 +31,22 @@ input {
     background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
+input:focus {
+    border-bottom: 1px solid red !important;
+    box-shadow: 0 1px 0 0 red !important;
+}
+
+/* ID */
+#new-account-btn {
+    display: none;
+}
+
+#login-btn {
+    display: none;
+}
+
+/* CLASS */
+
 .hero-image {
     background-image: url("/img/iStock-692855500.jpg");
     height: 100%;
@@ -55,7 +71,6 @@ input {
 
 /* MATERIALIZE RESTYLING */
 .btn-large {
-    display: none;
     animation: appear 0.7s;
     margin-top: 30px;
     width: 100%;
