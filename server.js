@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const app = express();
+const PORT = 3000;
 
 //==============================
 //    DATABASE SETUP
@@ -30,7 +31,7 @@ const sessionsController = require("./controllers/sessions.js");
 //==============================
 //    MIDDLEWARE
 //==============================
-app.use(express.static(__dirname, "/public"));
+app.use(express.static("public"));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({
     extended: false
@@ -47,9 +48,7 @@ app.use("/sessions", sessionsController);
 //    GET INDEX
 //==============================
 app.get("/", (req, res) => {
-    res.render("index.ejs", {
-        currentUser: req.sessions.currentUser
-    });
+    res.render("index.ejs");
 });
 
 app.get("/home", (req, res) => {
@@ -58,4 +57,8 @@ app.get("/home", (req, res) => {
     } else {
         res.redirect("/index.ejs");
     }
+});
+
+app.listen(PORT, () => {
+    console.log("port éisteachta...");
 });
