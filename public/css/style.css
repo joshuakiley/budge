@@ -29,6 +29,8 @@ h2 {
 input {
     color: white;
     background-color: rgba(255, 255, 255, 0.2) !important;
+    animation: appear 0.7s;
+    text-align: center;
 }
 
 input:focus {
@@ -37,11 +39,12 @@ input:focus {
 }
 
 /* ID */
-#new-account-btn {
+
+#home-window {
     display: none;
 }
 
-#login-btn {
+#login-window {
     display: none;
 }
 
@@ -63,7 +66,20 @@ input:focus {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
+    animation: moveup 2s;
 }
+
+@keyframes moveup {
+    0% {
+        top: 70%
+    }
+
+    100% {
+        top: 55%
+    }
+}
+
+
 
 .logo {
     width: 100%;
@@ -87,5 +103,11 @@ input:focus {
 
     100% {
         opacity: 1;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    h2 {
+        font-size: 24px;
     }
 }

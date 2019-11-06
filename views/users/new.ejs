@@ -5,11 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>budge: Create Account</title>
+    <link rel='shortcut icon' type='image/png' href='/img/favicon.png' />
+    <link rel="stylesheet" href="/css/materialize.min.css">
+    <link rel=" stylesheet" href="/css/style.css">
 </head>
 
 <body>
+    <div class="hero-image">
+        <div class="hero-text" id="hero-text">
+            <img class="logo" src="/img/header-logo-white.png" alt="budge logo">
+            <h2 class="hero-subtitle">the bite-sized<br>budget companion</h2>
 
+            <!-- CREATE -->
+            <form action="/users" method="POST">
+                <label for="username">USERNAME</label>
+                <input autocomplete="off" required class="input-field" type="text" name="username">
+
+                <br>
+
+                <label for="password">PASSWORD</label>
+                <input class="input-field" required type="password" name="password">
+
+                <button class="btn-large red waves-effect waves-light" type="submit" name="action">CREATE
+                </button>
+            </form>
+            <a href="/"><button class="btn-large red waves-effect waves-light" id="login-to-home">BACK</button></a>
+        </div>
+    </div>
+    <!-- SCRIPTS -->
+    <script src="/js/materialize.min.js"></script>
+    <script src="/js/users/new.js></script>
 </body>
 
 </html>
