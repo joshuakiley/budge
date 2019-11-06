@@ -7,7 +7,8 @@ const session = require("express-session");
 const methodOverride = require("method-override");
 const app = express();
 const bcrypt = require("bcrypt");
-const User = require("./models/users.js")
+const User = require("./models/users.js");
+const Item = require("./models/items.js");
 const PORT = 3000;
 
 //==============================
@@ -29,6 +30,7 @@ mongoose.connection.once("open", () => {
 //==============================
 const usersController = require("./controllers/users.js");
 const sessionsController = require("./controllers/sessions.js");
+const budgetsController = require("./controllers/budgets.js")
 
 //==============================
 //    MIDDLEWARE
@@ -45,6 +47,7 @@ app.use(session({
 }));
 app.use("/users", usersController);
 app.use("/sessions", sessionsController);
+app.use("/budgets", budgetsController);
 
 //==============================
 //    GET INDEX
@@ -65,12 +68,6 @@ app.get("/home", (req, res) => {
         res.redirect("/");
     }
 });
-
-const date = new Date(1980, 1, 31);
-const date2 = new Date(date).getDate() + 1;
-
-console.log(date)
-console.log(date2)
 
 app.listen(PORT, () => {
     console.log("port éisteachta...");

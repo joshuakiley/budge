@@ -4,12 +4,14 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: {
         type: String,
-        require
+        require: true
     },
     password: {
         type: String,
-        require
-    }
+        required: true
+    },
+}, {
+    timestamps: true
 });
 
 const User = mongoose.model("User", userSchema);
