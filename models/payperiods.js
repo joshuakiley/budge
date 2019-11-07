@@ -1,26 +1,24 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const itemSchema = new Schema({
+const payPeriodSchema = new Schema({
     user: String,
     days: {
         type: Number,
+    },
+    startDate: {
+        type: String,
         required: true
     },
-    expenses: [{
-        type: Number
-    }],
-    income: [{
-        type: Number
-    }],
-    note: [{
-        type: String
-    }]
+    endDate: {
+        type: String,
+        required: true
+    },
 
 }, {
     timestamps: true
-})
+});
 
-const Item = mongoose.model("Item", itemSchema);
+const PayPeriod = mongoose.model("PayPeriod", payPeriodSchema);
 
-module.exports = Item;
+module.exports = PayPeriod;

@@ -4,7 +4,11 @@ const bcrypt = require("bcrypt");
 const User = require("../models/users.js");
 
 router.get("/new", (req, res) => {
-    res.render("users/new.ejs");
+    if (req.session.currentUser) {
+        res.redirect("/")
+    } else {
+        res.render("users/new.ejs");
+    }
 });
 
 router.post("/", (req, res) => {
@@ -15,7 +19,7 @@ router.post("/", (req, res) => {
             console.log(error);
         } else {
             res.redirect("/home");
-            console.log(createdUser);
+            console.log(`User: ${createdUser.username}`);
         }
     });
 });

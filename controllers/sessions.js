@@ -9,9 +9,9 @@ router.post("/", (req, res) => {
     }, (error, foundUser) => {
         if (bcrypt.compareSync(req.body.password, foundUser.password)) {
             req.session.currentUser = foundUser;
-            res.redirect("/home");
+            res.redirect("/payperiods");
         } else {
-            res.send("wrong password");
+            res.send("Wrong password.")
             console.log(error);
         }
     });

@@ -38,7 +38,7 @@
                 <a style="background-color:rgba(229,28,35,0.1);"><i class="material-icons">home</i> HOME</a>
             </li>
             <li>
-                <a href="/budgets/new"><i class="material-icons">create_new_folder</i>NEW PAY PERIOD</a>
+                <a href="/payperiods/new"><i class="material-icons">create_new_folder</i>NEW PAY PERIOD</a>
             </li>
             <a href="/">
                 <form action="/sessions?_method=DELETE" method="POST">
@@ -76,10 +76,10 @@
                 </tr>
             </thead>
             <tbody>
-                <%items.forEach((el) => {%>
+                <%payperiods.forEach((el) => {%>
                 <tr>
                     <td>
-                        <a style="color:black;" href="/budgets/<%=el.id%>">
+                        <a style="color:black;" href="/payperiods/<%=el.id%>">
                             <button style="min-width: 100px;" class="btn red"><%=el.days%></button></a>
                     </td>
                     <td><%=el.income%></td>

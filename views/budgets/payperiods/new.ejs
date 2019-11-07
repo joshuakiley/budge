@@ -35,7 +35,7 @@
                 </div>
             </li>
             <li>
-                <a href="/home"><i class="material-icons">home</i> HOME</a>
+                <a href="/payperiods"><i class="material-icons">home</i> HOME</a>
             </li>
             <li>
                 <a style="background-color:rgba(229,28,35,0.1);"><i class="material-icons">create_new_folder</i>NEW PAY
@@ -52,14 +52,18 @@
     </header>
 
     <body>
-        <form action="/budgets" method="POST">
-            <legend>Time Period</legend>
-            <p>Enter the number of days between<br>your last paycheck and your next paycheck.</p>
-            <label for="days">Days</label>
-            <input autocomplete="off" style="color: black;" type="number" name="days">
+        <form action="/payperiods" method="POST">
+            <legend>Start Date</legend>
+            <p>Enter the date that you recieved your paycheck.</p>
+            <label for="startDate">Start Date</label>
+            <input autocomplete="off" placeholder="MM/DD/YYYY" style="color: black;" type="text" name="startDate">
 
-            <legend></legend>
+            <legend>End Date</legend>
+            <p>Enter the date of the day before you recieve your next paycheck.</p>
+            <label for="endDate">End Date</label>
+            <input autocomplete="off" placeholder="MM/DD/YYYY" style="color: black;" type="text" name="endDate">
 
+            <input type="submit" value="CREATE">
         </form>
     </body>
     <script src="/js/materialize.min.js"></script>

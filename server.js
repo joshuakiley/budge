@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const app = express();
 const bcrypt = require("bcrypt");
 const User = require("./models/users.js");
+const PayPeriod = require("./models/payperiods.js");
 const Item = require("./models/items.js");
 const PORT = 3000;
 
@@ -30,7 +31,8 @@ mongoose.connection.once("open", () => {
 //==============================
 const usersController = require("./controllers/users.js");
 const sessionsController = require("./controllers/sessions.js");
-const budgetsController = require("./controllers/budgets.js")
+const payPeriodsController = require("./controllers/payperiods.js")
+const itemsController = require("./controllers/items.js")
 
 //==============================
 //    MIDDLEWARE
@@ -47,30 +49,17 @@ app.use(session({
 }));
 app.use("/users", usersController);
 app.use("/sessions", sessionsController);
-app.use("/budgets", budgetsController);
+app.use("/payperiods", payPeriodsController);
+app.use("/items", itemsController);
 
 //==============================
 //    GET INDEX
 //==============================
 app.get("/", (req, res) => {
     if (req.session.currentUser !== undefined) {
-        res.redirect("/home")
+        res.redirect("/payperiods")
     } else {
         res.render("index.ejs");
-    }
-});
-
-app.get("/home", (req, res) => {
-    if (req.session.currentUser) {
-        Item.find({}, (error, allItems) => {
-            res.render("sessions/home.ejs", {
-                user: req.session.currentUser,
-                items: allItems
-            });
-            console.log(req.session.currentUser.username, "logged in")
-        });
-    } else {
-        res.redirect("/");
     }
 });
 
