@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>budge: home</title>
+    <title>budge</title>
     <link rel='shortcut icon' type='image/png' href='/img/favicon.png' />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/materialize.min.css">
@@ -16,7 +16,7 @@
     <header>
         <nav class="nav black">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo center">budget</a>
+                <a href="#" class="brand-logo center">pay period</a>
                 <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger"><i
                         class="material-icons">menu</i></a>
             </div>
@@ -30,15 +30,16 @@
                             <object class="small-logo" data="/img/header-logo-white.png" type="image/png"></object>
                         </div>
                     </div>
-                    <a href="#name"><span class="white-text name"><%=user.username%></span></a>
+                    <a href="#name"><span class="white-text name"></span></a>
                     <a href="#budget"><span>later add total</span></a>
                 </div>
             </li>
             <li>
-                <a style="background-color:rgba(229,28,35,0.1);"><i class="material-icons">home</i> HOME</a>
+                <a href="/home"><i class="material-icons">home</i>
+                    HOME</a>
             </li>
             <li>
-                <a href="/budgets/new"><i class="material-icons">create_new_folder</i>NEW PAY PERIOD</a>
+                <a href="/budgets/new"><i class="material-icons">create_new_folder</i>NEW BUDGET</a>
             </li>
             <a href="/">
                 <form action="/sessions?_method=DELETE" method="POST">
@@ -48,47 +49,23 @@
             </a>
         </ul>
     </header>
-    <section>
-        <h1>Total</h1>
-        <table class="centered striped highlight">
+    <main>
+        <h1>change this text later</h1>
+        <table class="centered">
             <thead>
                 <tr>
-                    <th>Total Income</th>
-                    <th>Total Expenses</th>
-                    <th>Difference</th>
+                    <th>Amount</th>
+                    <th>Notes</th>
                 </tr>
             </thead>
             <tbody>
-
+                <tr>
+                    <td>hey</td>
+                    <td>hey</td>
+                </tr>
             </tbody>
         </table>
-    </section>
-
-    <section>
-        <h1>Pay Periods</h1>
-        <!-- pay period list w/ period details and overall details-->
-        <table class="centered highlight">
-            <thead>
-                <tr>
-                    <th>Pay Period</th>
-                    <th>Income</th>
-                    <th>Expenses</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%items.forEach((el) => {%>
-                <tr>
-                    <td>
-                        <a style="color:black;" href="/budgets/<%=el.id%>">
-                            <button style="min-width: 100px;" class="btn red"><%=el.days%></button></a>
-                    </td>
-                    <td><%=el.income%></td>
-                    <td><%=el.expenses%></td>
-                </tr>
-                <%});%>
-            </tbody>
-        </table>
-    </section>
+    </main>
     <script src="/js/materialize.min.js"></script>
     <script src="/js/sidenav.js"></script>
 </body>

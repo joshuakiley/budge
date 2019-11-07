@@ -16,7 +16,7 @@
     <header>
         <nav class="nav black">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo center">new budget</a>
+                <a href="#" class="brand-logo center">new pay period</a>
                 <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger"><i
                         class="material-icons">menu</i></a>
             </div>
@@ -37,13 +37,31 @@
             <li>
                 <a href="/home"><i class="material-icons">home</i> HOME</a>
             </li>
+            <li>
+                <a style="background-color:rgba(229,28,35,0.1);"><i class="material-icons">create_new_folder</i>NEW PAY
+                    PERIOD</a>
+            </li>
+            <li>
+                <a href="/">
+                    <form action="/sessions?_method=DELETE" method="POST">
+                        <button class="btn waves-effect waves-light red" type="submit">LOG OUT</button>
+                    </form>
+                </a>
+            </li>
         </ul>
     </header>
-    <main>
-        <h1>Meow</h1>
-    </main>
 
-    <script src="/js/jquery-3.4.1.min.js"></script>
+    <body>
+        <form action="/budgets" method="POST">
+            <legend>Time Period</legend>
+            <p>Enter the number of days between<br>your last paycheck and your next paycheck.</p>
+            <label for="days">Days</label>
+            <input autocomplete="off" style="color: black;" type="number" name="days">
+
+            <legend></legend>
+
+        </form>
+    </body>
     <script src="/js/materialize.min.js"></script>
     <script src="/js/sidenav.js"></script>
 </body>

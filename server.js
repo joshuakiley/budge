@@ -62,8 +62,13 @@ app.get("/", (req, res) => {
 
 app.get("/home", (req, res) => {
     if (req.session.currentUser) {
-        res.render("sessions/home.ejs");
-        console.log(req.session.currentUser.username, "logged in")
+        Item.find({}, (error, allItems) => {
+            res.render("sessions/home.ejs", {
+                user: req.session.currentUser,
+                items: allItems
+            });
+            console.log(req.session.currentUser.username, "logged in")
+        });
     } else {
         res.redirect("/");
     }
