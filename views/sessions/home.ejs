@@ -6,26 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>budge: home</title>
+    <link rel='shortcut icon' type='image/png' href='/img/favicon.png' />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/materialize.min.css">
-    <link rel=" stylesheet" href="/css/calendar.css">
+    <link rel=" stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <h1>Home</h1>
-    <!-- create new pay period -->
-    <a href="/budgets/new"><button class="btn-large red waves-effect waves-light">NEW PAY PERIOD</button></a>
+    <header>
+        <nav class="nav black">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">new budget</a>
+                <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger"><i
+                        class="material-icons">menu</i></a>
+            </div>
+        </nav>
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <br>
+                    <div class="logo center">
+                        <div class="brand-logo">
+                            <object class="small-logo" data="/img/header-logo-white.png" type="image/png"></object>
+                        </div>
+                    </div>
+                    <a href="#name"><span class="white-text name">username</span></a>
+                    <a href="#budget"><span>later add total</span></a>
+                </div>
+            </li>
+            <li>
+                <a href="/home"><i class="material-icons">home</i> HOME</a>
+            </li>
+            <li>
+                <a href="/budgets/new"><i class="material-icons">create_new_folder</i>NEW BUDGET</a>
+            </li>
+            <li>
+                <a href="/">
+                    <form action="/sessions?_method=DELETE" method="POST">
+                        <button class="btn waves-effect waves-light red" type="submit">LOG OUT</button>
+                    </form>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <section>
+        <h1>Totals</h1>
+        <table class="centered striped highlight">
+            <thead>
+                <tr>
+                    <th>Total Income</th>
+                    <th>Total Expenses</th>
+                    <th>Difference</th>
+                </tr>
+            </thead>
+            <tbody>
 
-    <!-- pay period list w/ period details and overall details-->
-    <table>
-        <tr>
-            <th>Pay Period</th>
-            <th>Income</th>
-            <th>Expenses</th>
-            <th>Activity</th>
-        </tr>
-    </table>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h1>Budgets</h1>
+        <!-- pay period list w/ period details and overall details-->
+        <table class="centered striped highlight">
+            <thead>
+                <tr>
+                    <th>Pay Period</th>
+                    <th>Income</th>
+                    <th>Expenses</th>
+                    <th>Activity</th>
+                </tr>
+            </thead>
+        </table>
+        <!-- <button class="right hide-on-med-and-down btn-floating btn-large waves-effect waves-light red hide-onlarge"
+            type="submit"><i class="material-icons">add</i>
+            NEW</button> -->
+    </section>
+    <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/materialize.min.js"></script>
-    <script src="/js/calendar.js"></script>
+    <script src="/js/sidenav.js"></script>
 </body>
 
 </html>

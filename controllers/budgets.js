@@ -5,8 +5,10 @@ const User = require("../models/users.js");
 const Item = require("../models/items.js");
 
 router.get("/new", (req, res) => {
-    res.render("budgets/newbudget.ejs")
-})
+    res.render("budgets/newbudget.ejs", {
+        user: req.session.currentUser
+    });
+});
 
 router.post("/", (req, res) => {
     Item.create(req.body, (error, createdItem) => {

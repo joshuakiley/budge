@@ -3,7 +3,7 @@
 * {
     padding: 0;
     margin: 0;
-    font-family: 'Comfortaa', cursive !important;
+    font-family: 'Comfortaa', cursive;
     text-decoration: none;
 }
 
@@ -38,6 +38,10 @@ input:focus {
     box-shadow: 0 1px 0 0 red !important;
 }
 
+h1 {
+    text-align: center;
+}
+
 /* ID */
 
 #home-window {
@@ -46,6 +50,10 @@ input:focus {
 
 #login-window {
     display: none;
+}
+
+.sidenav-trigger {
+    display: block !important;
 }
 
 /* CLASS */
@@ -83,6 +91,19 @@ input:focus {
 
 .logo {
     width: 100%;
+}
+
+.user-view {
+    background-image: url("/img/iStock-692855500.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.small-logo {
+    width: 150px;
 }
 
 /* MATERIALIZE RESTYLING */

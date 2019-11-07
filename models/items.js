@@ -2,21 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
-    date: {
+    username: String,
+    password: String,
+    days: {
         type: Number,
         required: true
     },
-
-    // on = true = income or off = false = expense
-    type: {
-        type: Boolean,
-        required: true
-    },
-
-    amount: {
-        type: Number,
-        required: true
-    },
+    expenses: [{
+        type: Number
+    }],
+    income: [{
+        type: Number
+    }],
     note: {
         type: String,
         required: true

@@ -22,7 +22,7 @@ mongoose.connect("mongodb://localhost:27017/budge", {
 });
 
 mongoose.connection.once("open", () => {
-    console.log("mongo bongo time!");
+    console.log("Mongo: budge database online");
 });
 
 //==============================
@@ -63,12 +63,12 @@ app.get("/", (req, res) => {
 app.get("/home", (req, res) => {
     if (req.session.currentUser) {
         res.render("sessions/home.ejs");
-        console.log("logged in")
+        console.log(req.session.currentUser.username, "logged in")
     } else {
         res.redirect("/");
     }
 });
 
 app.listen(PORT, () => {
-    console.log("port éisteachta...");
+    console.log("Express: port éisteachta...");
 });
