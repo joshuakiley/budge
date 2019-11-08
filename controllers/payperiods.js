@@ -44,8 +44,22 @@ router.get("/new", (req, res) => {
 
 // NEW ITEM IN PAYPERIOD
 router.get("/:id/items/new", (req, res) => {
-    res.render("budgets/items/new.ejs")
-})
+    if (req.session.currentUser) {
+        const allPayPeriods = PayPeriod.find({
+            user: req.session.currentUser
+        });
+        const currentPayPeriod = PayPeriod.findById(req.params.id);
+        if (allPayPeriods !== undefined && currentPayPeriod !== undefined) {
+            res.render("budgets/items/new.ejs", {
+                user: req.session.currentUser,
+                payperiod: currentPayPeriod,
+                payperiods: allPayPeriods
+            });
+        }
+    } else {
+        res.redirect("/");
+    }
+});
 
 router.get("/:id", (req, res) => {
     if (req.session.currentUser) {
