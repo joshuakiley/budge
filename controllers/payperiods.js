@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const PayPeriod = require("../models/payperiods.js");
+const Item = require("../models/items.js")
 
 router.get("/", (req, res) => {
     if (req.session.currentUser) {
@@ -25,7 +26,7 @@ router.get("/", (req, res) => {
 router.get("/new", (req, res) => {
     if (req.session.currentUser) {
         PayPeriod.find({
-            user: req.sessions.currentUser
+            user: req.session.currentUser
         }, (error, allPayPeriods) => {
             if (error) {
                 res.send("its ded jim");
@@ -60,7 +61,9 @@ router.get("/:id/items/new", (req, res) => {
                     });
                 }
             });
-        })
+        });
+    } else {
+        res.redirect("/");
     }
 });
 
@@ -114,24 +117,6 @@ router.post("/", (req, res) => {
             } else {
                 res.redirect("/");
                 console.log(createdPayPeriod);
-            }
-        });
-    } else {
-        res.redirect("/");
-    }
-});
-
-router.post("/:id", (req, res) => {
-    if (req.session.currentUser) {
-        req.body.user = req.session.currentUser;
-        req.body.payperiod = PayPeriod.findById(req.params.id);
-        Item.create(req.body, (error, createdItem) => {
-            if (error) {
-                res.send("its ded jim");
-                console.log(error);
-            } else {
-                res.redirect("/:id");
-                console.log(createdItem);
             }
         });
     } else {
