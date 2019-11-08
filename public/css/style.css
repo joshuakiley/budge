@@ -70,12 +70,18 @@ h1 {
     display: none;
 }
 
-.header {
+.overview-head {
     display: flex;
     justify-content: space-around;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    align-items: center;
 }
 
-.header-text {
+.overview-text {
+    text-align: center;
+    width: 70px;
     font-weight: 800;
 }
 
@@ -87,7 +93,7 @@ h1 {
 
 .hero-image {
     background-image: url("/img/iStock-692855500.jpg");
-    height: 110%;
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -137,6 +143,7 @@ h1 {
 .btn-large {
     animation: appear 0.7s;
     width: 100%;
+    margin-top: 20px;
 }
 
 @keyframes appear {

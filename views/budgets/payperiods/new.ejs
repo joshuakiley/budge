@@ -16,7 +16,7 @@
     <header>
         <nav class="nav black">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo center">new pay period</a>
+                <a href="#" class="brand-logo center">budget</a>
                 <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger"><i
                         class="material-icons">menu</i></a>
             </div>
@@ -30,24 +30,39 @@
                             <object class="small-logo" data="/img/header-logo-white.png" type="image/png"></object>
                         </div>
                     </div>
-                    <a href="#name"><span class="white-text name">username</span></a>
+                    <a href="#name"><span class="white-text name"><%=user.username%></span></a>
                     <a href="#budget"><span>later add total</span></a>
                 </div>
             </li>
             <li>
-                <a href="/payperiods"><i class="material-icons">home</i> HOME</a>
+                <a href="/payperiods/"><i class="material-icons">home</i>
+                    HOME</a>
             </li>
             <li>
-                <a style="background-color:rgba(229,28,35,0.1);"><i class="material-icons">create_new_folder</i>NEW PAY
-                    PERIOD</a>
+                <ul class="collapsible collapsible-accordian">
+                    <li>
+                        <a class="collapsible-header waves-effect waves-red">PAY PERIODS</a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a style="background-color:rgba(229,28,35,0.1);"><i
+                                            class="material-icons">create_new_folder</i>NEW PAY
+                                        PERIOD</a></li>
+                                <%payperiods.forEach((el) => {%>
+                                <li><a href="/payperiods/<%=el.id%>"><i
+                                            class="material-icons">folder</i><%=el.startDate%> - <%=el.endDate%></a>
+                                </li>
+                                <%})%>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </li>
-            <li>
-                <a href="/">
-                    <form action="/sessions?_method=DELETE" method="POST">
-                        <button class="btn waves-effect waves-light red" type="submit">LOG OUT</button>
-                    </form>
-                </a>
-            </li>
+            <a style="z-index: 2; background-color: white; width: 100%; position: fixed; bottom: 61px;" href="/">
+                <form action="/sessions?_method=DELETE" method="POST">
+                    <button class="btn-large waves-effect waves-light red" type="submit">LOG
+                        OUT</button>
+                </form>
+            </a>
         </ul>
     </header>
 

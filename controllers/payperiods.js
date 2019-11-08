@@ -23,9 +23,21 @@ router.get("/", (req, res) => {
 
 // NEW PAYPERIOD
 router.get("/new", (req, res) => {
-    res.render("budgets/payperiods/new.ejs", {
-        user: req.session.currentUser
-    });
+    if (req.session.currentUser) {
+        PayPeriod.find({
+            user: req.sessions.currentUser
+        }, (error, allPayPeriods) => {
+            if (error) {
+                res.send("its ded jim");
+                console.log(error);
+            } else {
+                res.render("budgets/payperiods/new.ejs", {
+                    user: req.session.currentUser,
+                    payperiods: allPayPeriods
+                });
+            }
+        });
+    }
 });
 
 // NEW ITEM IN PAYPERIOD
@@ -34,13 +46,20 @@ router.get("/:id/items/new", (req, res) => {
 })
 
 router.get("/:id", (req, res) => {
-    PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
-        res.render("budgets/payperiods/show.ejs", {
-            user: req.session.currentUser,
-            payperiod: foundPayPeriod
+    if (req.session.currentUser) {
+        PayPeriod.find({
+            user: req.session.currentUser
+        }, (error, allPayPeriods) => {
+            PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
+                res.render("budgets/payperiods/show.ejs", {
+                    user: req.session.currentUser,
+                    payperiod: foundPayPeriod,
+                    payperiods: allPayPeriods
+                });
+                console.log(foundPayPeriod);
+            });
         });
-        console.log(foundPayPeriod);
-    });
+    }
 });
 
 router.get("/:id/edit", (req, res) => {

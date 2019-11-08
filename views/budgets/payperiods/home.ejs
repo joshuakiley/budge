@@ -65,26 +65,35 @@
     </header>
     <section>
         <h1>Total</h1>
-        <div>Income</div>
-        <div>Expenses</div>
-        <div>Difference</div>
+        <div class="overview-head">
+            <div class="overview-text">Income</div>
+            <div class="overview-text">Expenses</div>
+            <div class="overview-text">Difference</div>
+        </div>
+        <div class="overview-head">
+            <div class="overview-text">00000</div>
+            <div class="overview-text">00000</div>
+            <div class="overview-text">00000</div>
+        </div>
     </section>
 
     <section>
         <h1>Overview</h1>
-        <dir class="header">
-            <div class="header-text">Start Date</div>
-            <div class="header-text">End Date</div>
+        <dir class="overview-head">
+            <div class="overview-text">Start</div>
+            <div class="overview-text">End</div>
+            <div class="overview-text">Days</div>
+            <div class="overview-text">Diff</div>
+            <div class="overview-text">Link</div>
         </dir>
         <%payperiods.forEach((el) => {%>
-        <div class="collapsible-header">
-            <div class="header">
-                <div class="header-text"><%=el.startDate%></div>
-                <div class="header-text"><%=el.endDate%></div>
-            </div>
-        </div>
-        <div class="collapsible-body">
-            <a class="btn-small red" href="#">to page</a>
+        <div class="overview-head">
+            <div class="overview-text"><%=el.startDate%></div>
+            <div class="overview-text"><%=el.endDate%></div>
+            <div class="overview-text"><%=el.days%></div>
+            <div class="overview-text">00000</div>
+            <div class="overview-text"><a class="btn-small waves-effect waves-light red"
+                    href="/payperiods/<%=el.id%>">VIEW</a></div>
         </div>
         <%});%>
     </section>
