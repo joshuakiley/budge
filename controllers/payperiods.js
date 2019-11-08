@@ -84,20 +84,42 @@ router.get("/:id/edit", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-    req.body.user = req.session.currentUser
-    const start = new Date(req.body.startDate);
-    const end = new Date(req.body.endDate);
-    req.body.days = ((end - start) / (1000 * 3600 * 24));
-    console.log(((req.body.endDate - req.body.startDate) / (1000 * 3600 * 24)));
-    PayPeriod.create(req.body, (error, createdPayPeriod) => {
-        if (error) {
-            res.send("its ded jim");
-            console.log(error);
-        } else {
-            res.redirect("/");
-            console.log(createdPayPeriod);
-        }
-    });
+    if (req.session.currentUser) {
+        req.body.user = req.session.currentUser
+        const start = new Date(req.body.startDate);
+        const end = new Date(req.body.endDate);
+        req.body.days = ((end - start) / (1000 * 3600 * 24));
+        console.log(((req.body.endDate - req.body.startDate) / (1000 * 3600 * 24)));
+        PayPeriod.create(req.body, (error, createdPayPeriod) => {
+            if (error) {
+                res.send("its ded jim");
+                console.log(error);
+            } else {
+                res.redirect("/");
+                console.log(createdPayPeriod);
+            }
+        });
+    } else {
+        res.redirect("/");
+    }
+});
+
+router.post("/:id", (req, res) => {
+    if (req.session.currentUser) {
+        req.body.user = req.session.currentUser;
+        req.body.payperiod = PayPeriod.findById(req.params.id);
+        Item.create(req.body, (error, createdItem) => {
+            if (error) {
+                res.send("its ded jim");
+                console.log(error);
+            } else {
+                res.redirect("/:id");
+                console.log(createdItem);
+            }
+        });
+    } else {
+        res.redirect("/");
+    }
 });
 
 router.delete("/:id", (req, res) => {

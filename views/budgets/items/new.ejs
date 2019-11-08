@@ -9,7 +9,23 @@
 </head>
 
 <body>
+    <form action="/payperiods" method="POST">
+        <legend>Date</legend>
+        <p>Enter the date of the transaction.</p>
+        <label for="date">Date</label>
+        <input autocomplete="off" placeholder="MM/DD/YYYY" style="color: black;" type="text" name="date" id="date">
 
+        <legend>Amount</legend>
+        <p>Enter the amount of the transaction.<br>NOTE: Use a minus for deductions.</p>
+        <label for="amount">Amount</label>
+        <input autocomplete="off" placeholder="0.00" style="color: black;" type="number" name="amount" id="amount">
+
+        <legend>Note</legend>
+        <p>Write a note to yourself to remember what this transaction was for.</p>
+        <label for="note">Note</label>
+        <input autocomplete="off" placeholder="[recurring] rent" style="color: black;" type="text" name="note"
+            id="note">
+    </form>
 </body>
 
 </html>
