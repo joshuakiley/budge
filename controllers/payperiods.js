@@ -45,19 +45,22 @@ router.get("/new", (req, res) => {
 // NEW ITEM IN PAYPERIOD
 router.get("/:id/items/new", (req, res) => {
     if (req.session.currentUser) {
-        const allPayPeriods = PayPeriod.find({
+        PayPeriod.find({
             user: req.session.currentUser
-        });
-        const currentPayPeriod = PayPeriod.findById(req.params.id);
-        if (allPayPeriods !== undefined && currentPayPeriod !== undefined) {
-            res.render("budgets/items/new.ejs", {
-                user: req.session.currentUser,
-                payperiod: currentPayPeriod,
-                payperiods: allPayPeriods
+        }, (error, allPayPeriods) => {
+            PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
+                if (error) {
+                    res.send("its ded jim");
+                    console.log(error);
+                } else {
+                    res.render("budgets/items/new.ejs", {
+                        user: req.session.currentUser,
+                        payperiod: foundPayPeriod,
+                        payperiods: allPayPeriods
+                    });
+                }
             });
-        }
-    } else {
-        res.redirect("/");
+        })
     }
 });
 
