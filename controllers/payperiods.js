@@ -37,6 +37,8 @@ router.get("/new", (req, res) => {
                 });
             }
         });
+    } else {
+        res.redirect("/");
     }
 });
 
@@ -59,20 +61,26 @@ router.get("/:id", (req, res) => {
                 console.log(foundPayPeriod);
             });
         });
+    } else {
+        res.redirect("/");
     }
 });
 
 router.get("/:id/edit", (req, res) => {
-    PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
-        if (error) {
-            res.send("its ded jim");
-            console.log(error);
-        } else {
-            res.render("budgets/payperiods/edit.ejs", {
-                item: foundPayPeriod
-            });
-        }
-    });
+    if (req.session.currentUser) {
+        PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
+            if (error) {
+                res.send("its ded jim");
+                console.log(error);
+            } else {
+                res.render("budgets/payperiods/edit.ejs", {
+                    item: foundPayPeriod
+                });
+            }
+        });
+    } else {
+        res.redirect("/");
+    }
 });
 
 router.post("/", (req, res) => {
