@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const PayPeriod = require("../models/payperiods.js");
-const Item = require("../models/items.js")
 
 router.get("/", (req, res) => {
     if (req.session.currentUser) {
@@ -22,7 +21,6 @@ router.get("/", (req, res) => {
     }
 });
 
-// NEW PAYPERIOD
 router.get("/new", (req, res) => {
     if (req.session.currentUser) {
         PayPeriod.find({
@@ -43,30 +41,6 @@ router.get("/new", (req, res) => {
     }
 });
 
-// NEW ITEM IN PAYPERIOD
-router.get("/:id/items/new", (req, res) => {
-    if (req.session.currentUser) {
-        PayPeriod.find({
-            user: req.session.currentUser
-        }, (error, allPayPeriods) => {
-            PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
-                if (error) {
-                    res.send("its ded jim");
-                    console.log(error);
-                } else {
-                    res.render("budgets/items/new.ejs", {
-                        user: req.session.currentUser,
-                        payperiod: foundPayPeriod,
-                        payperiods: allPayPeriods
-                    });
-                }
-            });
-        });
-    } else {
-        res.redirect("/");
-    }
-});
-
 router.get("/:id", (req, res) => {
     if (req.session.currentUser) {
         PayPeriod.find({
@@ -76,7 +50,8 @@ router.get("/:id", (req, res) => {
                 res.render("budgets/payperiods/show.ejs", {
                     user: req.session.currentUser,
                     payperiod: foundPayPeriod,
-                    payperiods: allPayPeriods
+                    payperiods: allPayPeriods,
+                    items: foundPayPeriod.item
                 });
                 console.log(foundPayPeriod);
             });
@@ -88,27 +63,53 @@ router.get("/:id", (req, res) => {
 
 router.get("/:id/edit", (req, res) => {
     if (req.session.currentUser) {
-        PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
+        PayPeriod.find({
+            user: req.session.currentUser
+        }, (error, allPayPeriods) => {
             if (error) {
                 res.send("its ded jim");
                 console.log(error);
             } else {
-                res.render("budgets/payperiods/edit.ejs", {
-                    item: foundPayPeriod
+                PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
+                    if (error) {
+                        res.send("its ded jim");
+                        console.log(error);
+                    } else {
+                        res.render("budgets/items/edit.ejs", {
+                            user: req.session.currentUser,
+                            payperiod: foundPayPeriod,
+                            payperiods: allPayPeriods
+                        });
+                    }
                 });
             }
         });
-    } else {
-        res.redirect("/");
     }
 });
 
+// router.get("/:id/edit", (req, res) => {
+//     if (req.session.currentUser) {
+//         PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
+//             if (error) {
+//                 res.send("its ded jim");
+//                 console.log(error);
+//             } else {
+//                 res.render("budgets/payperiods/edit.ejs", {
+//                     item: foundPayPeriod
+//                 });
+//             }
+//         });
+//     } else {
+//         res.redirect("/");
+//     }
+// });
+
 router.post("/", (req, res) => {
     if (req.session.currentUser) {
-        req.body.user = req.session.currentUser
+        req.body.user = req.session.currentUser;
         const start = new Date(req.body.startDate);
         const end = new Date(req.body.endDate);
-        req.body.days = ((end - start) / (1000 * 3600 * 24));
+        req.body.days = Math.round(((end - start) / (1000 * 3600 * 24)) + 1);
         console.log(((req.body.endDate - req.body.startDate) / (1000 * 3600 * 24)));
         PayPeriod.create(req.body, (error, createdPayPeriod) => {
             if (error) {
@@ -124,8 +125,48 @@ router.post("/", (req, res) => {
     }
 });
 
+router.put("/:id", (req, res) => {
+    if (req.session.currentUser) {
+        PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
+            if (error) {
+                res.send("its ded jim");
+                console.log(error);
+            } else {
+                const newItemArr = [];
+                const newItem = {
+                    date: req.body.date,
+                    amount: parseFloat(req.body.amount),
+                    note: req.body.note
+                }
+                foundPayPeriod.item.forEach(el => {
+                    newItemArr.push(el);
+                });
+                newItemArr.push(newItem);
+                req.body.user = foundPayPeriod.user
+                req.body.days = foundPayPeriod.days;
+                req.body.startDate = foundPayPeriod.startDate;
+                req.body.endDate = foundPayPeriod.endDate;
+                req.body.item = newItemArr;
+                PayPeriod.findByIdAndUpdate(req.params.id, req.body, {
+                    new: true
+                }, (error, updatedPayPeriod) => {
+                    if (error) {
+                        res.send("its ded jim");
+                        console.log(error);
+                    } else {
+                        res.redirect(`${req.params.id}`);
+                    }
+                });
+            }
+        })
+
+    } else {
+        res.redirect("/");
+    }
+});
+
 router.delete("/:id", (req, res) => {
-    Item.findByIdAndRemove(req.params.id, (error, deletedPayPeriod) => {
+    PayPeriod.findByIdAndRemove(req.params.id, (error, deletedPayPeriod) => {
         if (error) {
             res.send("its ded jim");
             console.log(error);

@@ -14,6 +14,7 @@ const payPeriodSchema = new Schema({
         type: String,
         required: true
     },
+    item: []
 
 }, {
     timestamps: true

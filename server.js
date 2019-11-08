@@ -9,12 +9,12 @@ const app = express();
 const bcrypt = require("bcrypt");
 const User = require("./models/users.js");
 const PayPeriod = require("./models/payperiods.js");
-const Item = require("./models/items.js");
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 //==============================
 //    DATABASE SETUP
 //==============================
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/DB_NAME";
 mongoose.connect("mongodb://localhost:27017/budge", {
     useNewUrlParser: true,
     useFindAndModify: false,
@@ -32,7 +32,6 @@ mongoose.connection.once("open", () => {
 const usersController = require("./controllers/users.js");
 const sessionsController = require("./controllers/sessions.js");
 const payPeriodsController = require("./controllers/payperiods.js")
-const itemsController = require("./controllers/items.js")
 
 //==============================
 //    MIDDLEWARE
@@ -50,7 +49,6 @@ app.use(session({
 app.use("/users", usersController);
 app.use("/sessions", sessionsController);
 app.use("/payperiods", payPeriodsController);
-app.use("/items", itemsController);
 
 //==============================
 //    GET INDEX

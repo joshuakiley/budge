@@ -91,7 +91,13 @@
             <div class="overview-text"><%=el.startDate%></div>
             <div class="overview-text"><%=el.endDate%></div>
             <div class="overview-text"><%=el.days%></div>
-            <div class="overview-text">00000</div>
+            <div class="overview-text">
+                <% let total = 0.0; %>
+                <%el.item.forEach(num => {%>
+                <% total += parseFloat(num.amount);%>
+                <%})%>
+                <%=total;%>
+            </div>
             <div class="overview-text"><a class="btn-small waves-effect waves-light red"
                     href="/payperiods/<%=el.id%>">VIEW</a></div>
         </div>
