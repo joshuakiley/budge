@@ -21,11 +21,17 @@ router.get("/", (req, res) => {
     }
 });
 
+// NEW PAYPERIOD
 router.get("/new", (req, res) => {
     res.render("budgets/payperiods/new.ejs", {
         user: req.session.currentUser
     });
 });
+
+// NEW ITEM IN PAYPERIOD
+router.get("/:id/items/new", (req, res) => {
+    res.render("budgets/items/new.ejs")
+})
 
 router.get("/:id", (req, res) => {
     PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {

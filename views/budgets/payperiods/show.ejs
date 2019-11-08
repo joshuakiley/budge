@@ -35,11 +35,16 @@
                 </div>
             </li>
             <li>
-                <a href="/home"><i class="material-icons">home</i>
+                <a href="/payperiods"><i class="material-icons">home</i>
                     HOME</a>
             </li>
             <li>
                 <a href="/budgets/new"><i class="material-icons">create_new_folder</i>NEW BUDGET</a>
+            </li>
+
+
+            <li>
+                <a href="/payperiods/<%=payperiod.id%>/items/new"><i class="material-icons">add</i> NEW ITEM</a>
             </li>
             <a href="/">
                 <form action="/sessions?_method=DELETE" method="POST">
@@ -50,7 +55,7 @@
         </ul>
     </header>
     <main>
-        <h1>change this text later</h1>
+        <h1><%=payperiod.startDate%> to <%=payperiod.endDate%></h1>
         <table class="centered">
             <thead>
                 <tr>

@@ -5,11 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>budge</title>
+    <link rel='shortcut icon' type='image/png' href='/img/favicon.png' />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/materialize.min.css">
+    <link rel=" stylesheet" href="/css/style.css">
 </head>
 
 <body>
-
+    <header>
+        <nav class="nav black">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">item</a>
+                <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger"><i
+                        class="material-icons">menu</i></a>
+            </div>
+        </nav>
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <br>
+                    <div class="logo center">
+                        <div class="brand-logo">
+                            <object class="small-logo" data="/img/header-logo-white.png" type="image/png"></object>
+                        </div>
+                    </div>
+                    <a href="#name"><span class="white-text name"></span></a>
+                    <a href="#budget"><span>later add total</span></a>
+                </div>
+            </li>
+            <li>
+                <a href="/home"><i class="material-icons">home</i>
+                    HOME</a>
+            </li>
+            <li>
+                <a href="/budgets/new"><i class="material-icons">create_new_folder</i>NEW BUDGET</a>
+            </li>
+            <a href="/">
+                <form action="/sessions?_method=DELETE" method="POST">
+                    <button class="btn-large waves-effect waves-light red" type="submit">LOG
+                        OUT</button>
+                </form>
+            </a>
+        </ul>
+    </header>
+    <script src="/js/materialize.min.js"></script>
+    <script src="/js/sidenav.js"></script>
 </body>
 
 </html>
