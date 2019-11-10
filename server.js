@@ -15,8 +15,8 @@ const Transaction = require("./public/js/transaction.js");
 //==============================
 //    DATABASE SETUP
 //==============================
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/budge";
-mongoose.connect(MONGODB_URI, {
+const URL = process.env.MONGODB_URI || "mongodb://localhost:27017/budge";
+mongoose.connect(URL, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,
