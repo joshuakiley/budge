@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
             res.send("its ded jim");
             console.log(error);
         } else {
-            res.redirect("/home");
+            res.redirect("/payperiods");
             console.log(`User: ${createdUser.username}`);
         }
     });
