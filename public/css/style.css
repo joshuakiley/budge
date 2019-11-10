@@ -70,6 +70,16 @@ h1 {
     display: none;
 }
 
+.budget-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    max-width: 325px;
+    margin: 10px;
+}
+
 .overview-head {
     display: flex;
     justify-content: space-around;

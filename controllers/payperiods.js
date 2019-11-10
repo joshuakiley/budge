@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const PayPeriod = require("../models/payperiods.js");
+const Transaction = require("../public/js/transaction.js");
 
 router.get("/", (req, res) => {
     if (req.session.currentUser) {
@@ -87,30 +88,18 @@ router.get("/:id/edit", (req, res) => {
     }
 });
 
-// router.get("/:id/edit", (req, res) => {
-//     if (req.session.currentUser) {
-//         PayPeriod.findById(req.params.id, (error, foundPayPeriod) => {
-//             if (error) {
-//                 res.send("its ded jim");
-//                 console.log(error);
-//             } else {
-//                 res.render("budgets/payperiods/edit.ejs", {
-//                     item: foundPayPeriod
-//                 });
-//             }
-//         });
-//     } else {
-//         res.redirect("/");
-//     }
-// });
-
 router.post("/", (req, res) => {
     if (req.session.currentUser) {
         req.body.user = req.session.currentUser;
         const start = new Date(req.body.startDate);
         const end = new Date(req.body.endDate);
-        req.body.days = Math.round(((end - start) / (1000 * 3600 * 24)) + 1);
-        console.log(((req.body.endDate - req.body.startDate) / (1000 * 3600 * 24)));
+        if (start.getMonth() === end.getMonth()) {
+            req.body.days = end.getDate() - start.getDate() + 1;
+        } else if (start.getMonth() < end.getMonth()) {
+            const monthOneEnd = new Date(start.getFullYear(), start.getMonth() + 1, 0);
+            req.body.days = (monthOneEnd.getDate() - start.getDate() + 1) + end.getDate();
+        }
+
         PayPeriod.create(req.body, (error, createdPayPeriod) => {
             if (error) {
                 res.send("its ded jim");
@@ -133,20 +122,16 @@ router.put("/:id", (req, res) => {
                 console.log(error);
             } else {
                 const newItemArr = [];
-                const newItem = {
-                    date: req.body.date,
-                    amount: parseFloat(req.body.amount),
-                    note: req.body.note
-                }
+                const newTransaction = new Transaction(new Date(req.body.date), parseFloat(req.body.amount), req.body.note);
                 foundPayPeriod.item.forEach(el => {
                     newItemArr.push(el);
                 });
-                newItemArr.push(newItem);
-                req.body.user = foundPayPeriod.user
-                req.body.days = foundPayPeriod.days;
-                req.body.startDate = foundPayPeriod.startDate;
-                req.body.endDate = foundPayPeriod.endDate;
-                req.body.item = newItemArr;
+                newItemArr.push(newTransaction);
+                // req.body.user = foundPayPeriod.user
+                // req.body.days = foundPayPeriod.days;
+                // req.body.startDate = foundPayPeriod.startDate;
+                // req.body.endDate = foundPayPeriod.endDate;
+                // req.body.item = newItemArr;
                 PayPeriod.findByIdAndUpdate(req.params.id, req.body, {
                     new: true
                 }, (error, updatedPayPeriod) => {

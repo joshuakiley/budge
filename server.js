@@ -10,12 +10,13 @@ const bcrypt = require("bcrypt");
 const User = require("./models/users.js");
 const PayPeriod = require("./models/payperiods.js");
 const PORT = process.env.PORT || 3000;
+const Transaction = require("./public/js/transaction.js");
 
 //==============================
 //    DATABASE SETUP
 //==============================
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/DB_NAME";
-mongoose.connect("mongodb://localhost:27017/budge", {
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/budge";
+mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,

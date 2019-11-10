@@ -71,19 +71,35 @@
         </ul>
     </header>
     <main>
+
+
         <h1><%=payperiod.startDate%> - <%=payperiod.endDate%>
         </h1>
-        <p><%=payperiod.days%> Days</p>
-        <%items.forEach(el => { %>
-        <div class="overview-head">
-            <div class="overview-text"><%=el.date%></div>
-            <div class="overview-text">$<%=el.amount%></div>
-            <div class="overview-text"><%=el.note%></div>
+
+        <div class="container budget-container">
+            <% for (let i = 0; i < payperiod.days; i++) {%>
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator pikachu" src="/img/surprise pikachu.png" alt="surprised pickachu">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Card Title<i
+                            class="material-icons right">more_vert</i></span>
+                    <p>date</p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title activator grey-text text-darken-4">Card Title<i
+                            class="material-icons right">close</i></span>
+                </div>
+            </div>
+            <%}%>
         </div>
-        <%})%>
+
+
+
         <div style="border: none;" class="overview-head">
             <form action="/payperiods/<%=payperiod.id%>?_method=DELETE" method="POST">
-                <input class="btn red darken-2" type="submit" value="DELETE BUDGET"></form>
+            <input class="btn red darken-2" type="submit" value="DELETE BUDGET"></form>
 
             <a class="btn waves-effect waves-light green darken-3" href="/payperiods/<%=payperiod.id%>/edit">NEW
                 ITEM</a>
