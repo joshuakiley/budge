@@ -16,7 +16,7 @@ const Transaction = require("./public/js/transaction.js");
 //    DATABASE SETUP
 //==============================
 const URISTRING = process.env.MONGOLAB_URI || process.env.MONGODB_URI || "mongodb://localhost:27017/budge";
-mongoose.connect(URL, {
+mongoose.connect(URISTRING, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,
