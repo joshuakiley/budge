@@ -101,8 +101,9 @@
                         <%el.item.forEach(num => {%>
                         <% total += parseFloat(num.amount);%>
                         <%})%>
-
+                        <%if (el.bills.rent !== undefined) {%>
                         <%=total + el.bills.rent + el.bills.phone + el.bills.phone;%>
+                        <%}%>
                     </div>
                     <div class="overview-text"><a class="btn-small waves-effect waves-light red"
                             href="/payperiods/<%=el.id%>">VIEW</a></div>
