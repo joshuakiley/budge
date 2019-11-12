@@ -14,6 +14,11 @@ const payPeriodSchema = new Schema({
         type: String,
         required: true
     },
+    income: {
+        type: Number,
+        required: true
+    },
+    bills: Object,
     item: []
 
 }, {

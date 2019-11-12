@@ -73,11 +73,25 @@ h1 {
 .budget-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.expenses {
+    border: 1px solid black;
+    margin: 1px;
+    padding: 2px;
+}
+
+.negative {
+    color: #c62828;
+}
+
+.positive {
+    color: #2e7d32;
 }
 
 .card {
-    max-width: 325px;
-    margin: 10px;
+    max-width: 350px;
 }
 
 .overview-head {

@@ -71,37 +71,43 @@
             <div class="overview-text">Difference</div>
         </div>
         <div class="overview-head">
-            <div class="overview-text">00000</div>
-            <div class="overview-text">00000</div>
-            <div class="overview-text">00000</div>
+            <div class="overview-text positive"><%=income%></div>
+            <div class="overview-text negative"><%=expenses%></div>
+            <div class="overview-text
+            <%if (income + expenses > 0) {%>
+                positive
+            <%} else {%>
+                negative
+            <%}%>"><%=income + expenses%></div>
         </div>
     </section>
 
     <section>
         <h1>Overview</h1>
-        <dir class="overview-head">
-            <div class="overview-text">Start</div>
-            <div class="overview-text">End</div>
-            <div class="overview-text">Days</div>
-            <div class="overview-text">Diff</div>
-            <div class="overview-text">Link</div>
-        </dir>
-        <%payperiods.forEach((el) => {%>
-        <div class="overview-head">
-            <div class="overview-text"><%=el.startDate%></div>
-            <div class="overview-text"><%=el.endDate%></div>
-            <div class="overview-text"><%=el.days%></div>
-            <div class="overview-text">
-                <% let total = 0.0; %>
-                <%el.item.forEach(num => {%>
-                <% total += parseFloat(num.amount);%>
-                <%})%>
-                <%=total;%>
-            </div>
-            <div class="overview-text"><a class="btn-small waves-effect waves-light red"
-                    href="/payperiods/<%=el.id%>">VIEW</a></div>
-        </div>
-        <%});%>
+        <dir class=" overview-head">
+                <div class="overview-text">Start<br>Date</div>
+                <div class="overview-text">End<br>Date</div>
+                <div class="overview-text">Potential<br>Savings</div>
+                <div class="overview-text">View<br>Details</div>
+                </dir>
+                <%payperiods.forEach((el) => {%>
+                <div class="overview-head">
+                    <div class="overview-text"><%=monthArrHalf[new Date(el.startDate).getMonth() - 1]%>
+                        <%=new Date(el.startDate).getDate()%><br><%=new Date(el.startDate).getFullYear()%></div>
+                    <div class="overview-text"><%=monthArrHalf[new Date(el.endDate).getMonth() - 1]%>
+                        <%=new Date(el.endDate).getDate()%><br><%=new Date(el.endDate).getFullYear()%></div>
+                    <div class="overview-text">
+                        <% let total = el.income; %>
+                        <%el.item.forEach(num => {%>
+                        <% total += parseFloat(num.amount);%>
+                        <%})%>
+
+                        <%=total + el.bills.rent + el.bills.phone + el.bills.phone;%>
+                    </div>
+                    <div class="overview-text"><a class="btn-small waves-effect waves-light red"
+                            href="/payperiods/<%=el.id%>">VIEW</a></div>
+                </div>
+                <%});%>
     </section>
     <script src="/js/materialize.min.js"></script>
     <script src="/js/sidenav.js"></script>

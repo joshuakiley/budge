@@ -56,7 +56,7 @@
                                             class="material-icons">folder</i><%=el.startDate%> - <%=el.endDate%></a>
                                     <%}%>
                                 </li>
-                                <%})%>
+                                <%});%>
                             </ul>
                         </div>
                     </li>
@@ -73,37 +73,80 @@
     <main>
 
 
-        <h1><%=payperiod.startDate%> - <%=payperiod.endDate%>
+        <h1><%=monthArrFull[new Date(payperiod.startDate).getMonth()]%>
+            <%=new Date(payperiod.startDate).getDate()%>,
+            <%=new Date(payperiod.startDate).getFullYear()%><br><%=monthArrFull[new Date(payperiod.endDate).getMonth()]%>
+            <%=new Date(payperiod.endDate).getDate()%>, <%=new Date(payperiod.endDate).getFullYear()%>
         </h1>
 
         <div class="container budget-container">
-            <% for (let i = 0; i < payperiod.days; i++) {%>
+            <% for (let i = new Date(payperiod.startDate).getDate(); i <= payperiod.days; i++) {%>
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator pikachu" src="/img/surprise pikachu.png" alt="surprised pickachu">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Card Title<i
-                            class="material-icons right">more_vert</i></span>
-                    <p>date</p>
+                    <span class="card-title activator grey-text text-darken-4">
+                        <%=monthArrHalf[new Date(payperiod.startDate).getMonth() - 1]%> <%=i%>
+
+                        <i class="material-icons right">more_vert</i></span>
+                    <div class="container budget-container">
+                        <span>Income</span>
+                        <span>Expenses</span>
+                        <span>Budget</span>
+                    </div>
+                    <div class="container budget-container">
+                        <span class="positive"><%=Math.floor(payperiod.income / payperiod.days * 100) / 100%></span>
+                        <span
+                            class="negative"><%=Math.floor((payperiod.bills.rent + payperiod.bills.phone + payperiod.bills.car) / payperiod.days * 100) / 100%></span>
+                        <%let total = 0%>
+                        <% payperiod.item.forEach(el => {%>
+                        <%if (el.date.getDate() === i) {%>
+                        <%total += el.amount%>
+                        <%}%>
+                        <%})%>
+                        <% if ((Math.floor(Math.floor(payperiod.income / payperiod.days * 100) / 100) + (Math.floor((payperiod.bills.rent + payperiod.bills.phone + payperiod.bills.car) / payperiod.days * 100) / 100) + total) > 0) {%>
+                        <span
+                            class="positive"><%=Math.floor(Math.floor(payperiod.income / payperiod.days * 100) / 100) + (Math.floor((payperiod.bills.rent + payperiod.bills.phone + payperiod.bills.car) / payperiod.days * 100) / 100) + total%></span>
+                        <%} else {%>
+                        <span
+                            class="negative"><%=Math.floor(Math.floor(payperiod.income / payperiod.days * 100) / 100) + (Math.floor((payperiod.bills.rent + payperiod.bills.phone + payperiod.bills.car) / payperiod.days * 100) / 100) + total%></span>
+                        <%}%>
+
+                    </div>
                 </div>
                 <div class="card-reveal">
-                    <span class="card-title activator grey-text text-darken-4">Card Title<i
-                            class="material-icons right">close</i></span>
+                    <span
+                        class="card-title activator grey-text text-darken-4"><%=monthArrHalf[new Date(payperiod.startDate).getMonth() - 1]%>
+                        <%=i%><i class="material-icons right">close</i></span>
+                        <p>List of Expenses</p>
+                        <div class="budget-container">
+                            <span class="expenses negative">Rent:
+                                <%=Math.floor(payperiod.bills.rent / payperiod.days * 100) / 100%></span>
+                            <span class="expenses negative">Phone:
+                                <%=Math.floor(payperiod.bills.phone / payperiod.days * 100) / 100%></span>
+                            <span class="expenses negative">Car:
+                                <%=Math.floor(payperiod.bills.car / payperiod.days * 100) / 100%></span>
+                            <%payperiod.item.forEach(el => {%>
+                            <%if (el.date.getDate() === i) {%>
+                            <span class="expenses negative"><%=el.note%>: <%=el.amount%></span>
+                            <%}%>
+                            <%});%>
+                        </div>
+                    </div>
                 </div>
+                <%}%>
+                    </div>
+
+
+
+                    <div style="border: none;" class="overview-head">
+                        <form action="/payperiods/<%=payperiod.id%>?_method=DELETE" method="POST">
+                <input class="btn red darken-2" type="submit" value="DELETE BUDGET"></form>
+
+                <a class="btn waves-effect waves-light green darken-3" href="/payperiods/<%=payperiod.id%>/edit">NEW
+                    ITEM</a>
             </div>
-            <%}%>
-        </div>
-
-
-
-        <div style="border: none;" class="overview-head">
-            <form action="/payperiods/<%=payperiod.id%>?_method=DELETE" method="POST">
-            <input class="btn red darken-2" type="submit" value="DELETE BUDGET"></form>
-
-            <a class="btn waves-effect waves-light green darken-3" href="/payperiods/<%=payperiod.id%>/edit">NEW
-                ITEM</a>
-        </div>
     </main>
     <script src="/js/materialize.min.js"></script>
     <script src="/js/sidenav.js"></script>
