@@ -78,7 +78,7 @@
                 positive
             <%} else {%>
                 negative
-            <%}%>"><%=income + expenses%></div>
+            <%}%>"><%=Math.floor((income + expenses) * 100) / 100%></div>
         </div>
     </section>
 
@@ -102,7 +102,7 @@
                         <% total += parseFloat(num.amount);%>
                         <%})%>
                         <%if (el.bills.rent !== undefined) {%>
-                        <%=total + el.bills.rent + el.bills.phone + el.bills.phone;%>
+                        <%=Math.floor((total + el.bills.rent + el.bills.phone + el.bills.phone) * 100) / 100;%>
                         <%}%>
                     </div>
                     <div class="overview-text"><a class="btn-small waves-effect waves-light red"
