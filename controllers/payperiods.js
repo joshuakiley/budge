@@ -14,7 +14,9 @@ router.get("/", (req, res) => {
             let expenses = 0;
             allPayPeriods.forEach(el => {
                 income += el.income
-                expenses += (el.bills.rent + el.bills.phone + el.bills.car)
+                if (el.bills.rent !== undefined) {
+                    expenses += (el.bills.rent + el.bills.phone + el.bills.car)
+                }
             });
             if (error) {
                 res.send("its ded jim");
