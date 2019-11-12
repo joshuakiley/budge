@@ -12,12 +12,14 @@ router.get("/", (req, res) => {
         }, (error, allPayPeriods) => {
             let income = 0;
             let expenses = 0;
-            allPayPeriods.forEach(el => {
-                income += el.income
-                if (el.bills.rent !== undefined) {
-                    expenses += (el.bills.rent + el.bills.phone + el.bills.car)
-                }
-            });
+            if (allPayPeriods !== undefined) {
+                allPayPeriods.forEach(el => {
+                    income += el.income
+                    if (el.bills.rent !== undefined) {
+                        expenses += (el.bills.rent + el.bills.phone + el.bills.car)
+                    }
+                });
+            }
             if (error) {
                 res.send("its ded jim");
             } else {
